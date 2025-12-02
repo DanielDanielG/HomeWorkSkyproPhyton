@@ -1,0 +1,13 @@
+def Number(num):
+    print(num, end='')
+Number(8)
+Number(8)
+Number(0)
+Number(0)
+Number(5)
+Number(5)
+Number(5)
+Number(3)
+Number(5)
+Number(3)
+Number(5)
