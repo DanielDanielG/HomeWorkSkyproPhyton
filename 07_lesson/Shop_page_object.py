@@ -1,9 +1,6 @@
-from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.firefox.service import Service
-from webdriver_manager.firefox import GeckoDriverManager
 
 
 class AuthorizationPage:
@@ -147,41 +144,3 @@ class SummaryPage:
         Total_amount = Amount.text
         print("Найдена итоговая сумма")
         return Total_amount
-
-
-def test_login_standard_user():
-
-    driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()))
-    try:
-        page = AuthorizationPage(driver)
-        page.authorization("standard_user", "secret_sauce")
-        Product_Page = ProductPage(driver)
-        Product_Page.add_product(
-            'sauce-labs-backpack',
-            'sauce-labs-onesie',
-            'sauce-labs-bolt-t-shirt'
-        )
-        Cart_Page = CartPage(driver)
-        Cart_Page.Cart()
-
-        Form_Page = FormPage(driver)
-        Form_Page.Form('Daniil', 'Golikov', '163000')
-
-        Summ_Page = SummaryPage(driver)
-        Total_amount = Summ_Page.Summary()
-
-        # Проверка итоговой стоимости с страницы
-        print("Сравнение итоговой и ожидаемой стоимости")
-        expected_total_amount = "Total: $58.29"
-        assert Total_amount == expected_total_amount, (
-            f"Ожидалась сумма {expected_total_amount}, "
-            f"но получили {Total_amount}")
-        print("Тест успешно пройден!")
-
-    except Exception as e:
-
-        print(f"Произошла ошибка: {e}")
-        raise
-    finally:
-        driver.quit()
-        print("Браузер закрыт")

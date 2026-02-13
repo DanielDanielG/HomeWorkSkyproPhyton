@@ -1,9 +1,6 @@
-from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.service import Service as ChromeService
-from webdriver_manager.chrome import ChromeDriverManager
 
 
 class CalculatorPage:
@@ -45,20 +42,3 @@ class CalculatorPage:
 
     def get_result_text(self):
         return self._driver.find_element(By.CLASS_NAME, "screen").text
-
-
-def test_calculator():
-    driver = webdriver.Chrome(service=ChromeService(
-        ChromeDriverManager().install()))
-
-    Calculator = CalculatorPage(driver)
-    Calculator.set_delay(45)
-    Calculator.click_button("7")
-    Calculator.click_button("+")
-    Calculator.click_button("8")
-    Calculator.click_button("=")
-    Calculator.wait_for_result("15")
-    actual_result = Calculator.get_result_text()
-    assert actual_result == "15", "Ожидался результат '15'"
-    ", но получили '{actual_result}'"
-    driver.quit()
