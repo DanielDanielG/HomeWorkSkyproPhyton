@@ -5,7 +5,7 @@ import random
 # ======================================
 
 BASE_URL = "https://yougile.com"
-API_KEY = "htbVXZOZhj3rd4tgai526zFSyXUY+5RAv7MqdYFouyWsxInZ9m9fQQFJw4xf3kLh"
+API_KEY = ""
 USER_ID = "6509c5a3-1c86-4071-9136-6a6405270e35"
 
 HEADERS = {
